@@ -2,6 +2,16 @@ import React, { Component } from "react";
 import "../style.css";
 
 class ProductItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
+  }
+
+  handleDeleteProduct() {
+    const { handleDeleteProduct, name } = this.props;
+    handleDeleteProduct(name);
+  }
   render() {
     const { name, price, color } = this.props;
     return (
@@ -14,7 +24,9 @@ class ProductItem extends Component {
         </td>
         <td>
           {" "}
-          <button className="deleteButton">delete</button>
+          <button className="deleteButton" onClick={this.handleDeleteProduct}>
+            delete
+          </button>
         </td>
       </div>
     );
