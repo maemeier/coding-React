@@ -4,7 +4,7 @@ import './style.css';
 
 
 // create data
-const prodcuts =[
+const products =[
   {id:1, name:"iphone", color:"Stonegrey", price:789},
   {id:2, name:"Samsung", color:"Midnight Blck", price:569},
   {id:3, name:"Hauwai P9", color:"Mystic Silver", price:272}
@@ -12,13 +12,20 @@ const prodcuts =[
 
 // get data
 
-localStorage.setItem("products", JSON.stringify(prodcuts))
+localStorage.setItem("products", JSON.stringify(products))
 
 class App extends Component{
 
 
 componentWillMount(){
+ const products = this.getProducts();
+}
 
+getProducts(){
+  const products = JSON.parse(localStorage.getItem("products"))
+  console.log(products);
+
+  this.setState({products})
 }
 
 handleAddProduct(){
