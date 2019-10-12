@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './style.css';
 
-function App() {
-  return (
+class App extends Component{
+render (){
+  return(
     <div>
-    test
+He
     </div>
-  );
+  )
 }
-
+}
 export default App;
