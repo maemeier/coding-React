@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProductItem from "./components/productItem";
+import Addproduct from "./components/addProduct";
 import "./style.css";
 
 // create data
@@ -19,6 +20,7 @@ class App extends Component {
     this.state = {
       product: JSON.parse(localStorage.getItem("products"))
     };
+    this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
   }
   componentWillMount() {
     const product = this.getProducts;
@@ -33,31 +35,21 @@ class App extends Component {
 
   handleUpdateProduct() {}
 
-  handleDeleteProduct() {}
+  handleDeleteProduct(name) {
+    const products = this.getProducts();
+    const deleteProduct = products.filter(product => {
+      return product.name !== name;
+    });
+    this.setState({ products: deleteProduct });
+    console.log(deleteProduct);
+  }
 
   render() {
     return (
       <div>
         <h2> Smart phones stock</h2>
         <div className="container">
-          <div className="inputBox">
-            <p>Input your data</p>
-            <form>
-              <div className="form">
-                <strong>Name:</strong>
-                <input type="text" placeholder="Product Name" refs="name" />
-              </div>
-              <div className="form">
-                <strong>Color:</strong>
-                <input type="text" placeholder="Color" refs="color" />
-              </div>
-              <div className="form">
-                <strong>Price:</strong>
-                <input type="number" placeholder=" Price" refs="price" />
-              </div>
-              <button className="submitButton">Submit</button>
-            </form>
-          </div>
+          <Addproduct />
           <div className="displayBox">
             <table>
               <thead>
@@ -75,6 +67,7 @@ class App extends Component {
                   name={product.name}
                   price={product.price}
                   color={product.color}
+                  handleDeleteProduct={this.handleDeleteProduct}
                 />
               );
             })}
