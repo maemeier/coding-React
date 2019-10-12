@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ProductTable from "./components/productItem";
+import ProductItem from "./components/productItem";
 import "./style.css";
 
 // create data
 const products = [
-  { id: 1, name: "iphone", color: "Stonegrey", price: 789 },
-  { id: 2, name: "Samsung", color: "Midnight Blck", price: 569 },
-  { id: 3, name: "Hauwai P9", color: "Mystic Silver", price: 272 }
+  { name: "iphone", color: "Stonegrey", price: 789 },
+  { name: "Samsung", color: "Midnight Blck", price: 569 },
+  { name: "Hauwai P9", color: "Mystic Silver", price: 272 }
 ];
 
 // get data
@@ -14,15 +14,19 @@ const products = [
 localStorage.setItem("products", JSON.stringify(products));
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: JSON.parse(localStorage.getItem("products"))
+    };
+  }
   componentWillMount() {
-    const products = this.getProducts();
+    const product = this.getProducts;
+    this.setState({ products });
   }
 
   getProducts() {
-    const products = JSON.parse(localStorage.getItem("products"));
-    console.log(products);
-
-    this.setState({ products });
+    return this.state.products;
   }
 
   handleAddProduct() {}
@@ -41,29 +45,39 @@ class App extends Component {
             <form>
               <div className="form">
                 <strong>Name:</strong>
-                <input type="text" placeHolder="Product Name" refs="name" />
+                <input type="text" placeholder="Product Name" refs="name" />
               </div>
               <div className="form">
                 <strong>Color:</strong>
-                <input type="text" placeHolder="Color" refs="color" />
+                <input type="text" placeholder="Color" refs="color" />
               </div>
               <div className="form">
                 <strong>Price:</strong>
-                <input type="number" placeHolder=" Price" refs="price" />
+                <input type="number" placeholder=" Price" refs="price" />
               </div>
               <button className="submitButton">Submit</button>
             </form>
           </div>
           <div className="displayBox">
             <table>
-              <tr>
+              <thead>
                 <th className="headerName">Product</th>
                 <th className="headerName">Color</th>
                 <th className="headerName">Price</th>
                 <th className="headerName">Edit</th>
                 <th className="headerName">Delete</th>
-              </tr>
+              </thead>
             </table>
+            {this.state.products.map(product => {
+              return (
+                <ProductItem
+                  key={product.name}
+                  name={product.name}
+                  price={product.price}
+                  color={product.color}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
