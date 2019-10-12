@@ -30,8 +30,9 @@ handleUpdateProduct(){
 }
 
 handleDeleteProduct(){
-  
+
 }
+
 
 render (){
   return(
