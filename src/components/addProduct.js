@@ -9,6 +9,14 @@ class addProduct extends Component {
 
   onSubmit(event) {
     event.preventDefault();
+    this.props.handleAddProduct(
+      this.nameInput.value,
+      this.priceInput.value,
+      this.colorInput.value
+    );
+    this.nameInput.value = " ";
+    this.colorInput.value = " ";
+    this.priceInput.value = " ";
   }
   render() {
     return (
@@ -21,7 +29,7 @@ class addProduct extends Component {
               <input
                 type="text"
                 placeholder="Product Name"
-                refs={nameInput => (this.nameInput = nameInput)}
+                ref={nameInput => (this.nameInput = nameInput)}
               />
             </div>
             <div className="form">
@@ -29,7 +37,7 @@ class addProduct extends Component {
               <input
                 type="text"
                 placeholder="Color"
-                refs={colorInput => (this.colorInput = colorInput)}
+                ref={colorInput => (this.colorInput = colorInput)}
               />
             </div>
             <div className="form">
@@ -37,7 +45,7 @@ class addProduct extends Component {
               <input
                 type="number"
                 placeholder=" Price"
-                rrefs={priceInput => (this.priceInput = priceInput)}
+                ref={priceInput => (this.priceInput = priceInput)}
               />
             </div>
             <button className="submitButton">Add Product</button>
