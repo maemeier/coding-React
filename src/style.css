@@ -54,7 +54,7 @@ li {
 
 p {
   margin: auto;
-  padding-top: 15px;
+  padding-top: 20px;
   margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
@@ -73,6 +73,7 @@ table {
 }
 strong {
   margin-top: 20px;
+  color: #102f63;
 }
 .descriptionName {
   text-align: center;

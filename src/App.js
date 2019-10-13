@@ -5,7 +5,7 @@ import "./style.css";
 
 // create data
 const products = [
-  { id: 1, name: "Apple iphone 6s", color: "Stonegrey", price: 789 },
+  { id: 1, name: "Apple", color: "Stonegrey", price: 789 },
   { id: 2, name: "Samsung Galaxy S8", color: "Midnight Black", price: 569 },
   { id: 3, name: "Hauwai P9", color: "Mystic Silver", price: 272 }
 ];
@@ -35,14 +35,19 @@ class App extends Component {
 
   handleAddProduct(name, color, price) {
     const products = this.getProducts();
-    products.push({
-      name,
-      color,
-      price
-    });
+    if (products.includes(name) !== products.name) {
+      products.push({
+        name,
+        color,
+        price
+      });
+    } else {
+      alert("the product is already exsisted");
+    }
 
     // if the product already exsist, show warining
     // convert all color name to stardard color
+
     this.setState({ products });
   }
 
@@ -88,14 +93,16 @@ class App extends Component {
 
             {this.state.products.map(product => {
               return (
-                <ProductItem
-                  key={product.name}
-                  name={product.name}
-                  price={product.price}
-                  color={product.color}
-                  handleDeleteProduct={this.handleDeleteProduct}
-                  handleEditSubmit={this.handleEditSubmit}
-                />
+                <tr>
+                  <ProductItem
+                    key={product.name}
+                    name={product.name}
+                    price={product.price}
+                    color={product.color}
+                    handleDeleteProduct={this.handleDeleteProduct}
+                    handleEditSubmit={this.handleEditSubmit}
+                  />
+                </tr>
               );
             })}
           </div>

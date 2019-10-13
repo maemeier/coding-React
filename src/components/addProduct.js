@@ -11,8 +11,8 @@ class addProduct extends Component {
     event.preventDefault();
     this.props.handleAddProduct(
       this.nameInput.value,
-      this.priceInput.value,
-      this.colorInput.value
+      this.colorInput.value,
+      this.priceInput.value
     );
     this.nameInput.value = " ";
     this.colorInput.value = " ";
@@ -49,7 +49,7 @@ class addProduct extends Component {
                 ref={priceInput => (this.priceInput = priceInput)}
               />
             </div>
-            <button className="submitButton">Add Product</button>
+            <button className="submitButton">Add</button>
           </form>
         </div>
       </div>
