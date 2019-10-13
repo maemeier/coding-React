@@ -5,9 +5,9 @@ import "./style.css";
 
 // create data
 const products = [
-  { name: "iphone", color: "Stonegrey", price: 789 },
-  { name: "Samsung", color: "Midnight Blck", price: 569 },
-  { name: "Hauwai P9", color: "Mystic Silver", price: 272 }
+  { id: 1, name: "Apple iphone 6s", color: "Stonegrey", price: 789 },
+  { id: 2, name: "Samsung Galaxy S8", color: "Midnight Black", price: 569 },
+  { id: 3, name: "Hauwai P9", color: "Mystic Silver", price: 272 }
 ];
 
 // get data
@@ -21,6 +21,7 @@ class App extends Component {
       product: JSON.parse(localStorage.getItem("products"))
     };
     this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
+    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
   componentWillMount() {
     const product = this.getProducts;
@@ -31,7 +32,18 @@ class App extends Component {
     return this.state.products;
   }
 
-  handleAddProduct() {}
+  handleAddProduct(name, color, price) {
+    const products = this.getProducts();
+    products.push({
+      name,
+      color,
+      price
+    });
+
+    // if the product already exsist, show warining
+    // convert all color name to stardard color
+    this.setState({ products });
+  }
 
   handleUpdateProduct() {}
 
@@ -49,7 +61,7 @@ class App extends Component {
       <div>
         <h2> Smart phones stock</h2>
         <div className="container">
-          <Addproduct />
+          <Addproduct handleAddProduct={this.handleAddProduct} />
           <div className="displayBox">
             <table>
               <thead>
@@ -60,6 +72,7 @@ class App extends Component {
                 <th className="headerName">Delete</th>
               </thead>
             </table>
+
             {this.state.products.map(product => {
               return (
                 <ProductItem
