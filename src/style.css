@@ -53,6 +53,9 @@ li {
 }
 
 p {
+  margin: auto;
+  padding-top: 15px;
+  margin-bottom: 15px;
   text-align: center;
   font-weight: bold;
   color: #102f63;
@@ -91,11 +94,6 @@ tr:nth-child(even) {
   background-color: #ffffff;
 }
 
-.icon {
-  display: block;
-  margin: auto;
-}
-
 .editButton {
   background: #3f464c;
 
@@ -109,6 +107,17 @@ tr:nth-child(even) {
 
 .deleteButton {
   background: tomato;
+  border-radius: 3px;
+
+  color: white;
+  display: block;
+  margin: auto;
+  font-size: 13px;
+  border: none;
+}
+
+.updateButton {
+  background: #4d7902;
   border-radius: 3px;
 
   color: white;

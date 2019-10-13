@@ -22,13 +22,14 @@ class addProduct extends Component {
     return (
       <div>
         <div className="inputBox">
-          <p>Input your product</p>
           <form onSubmit={this.onSubmit}>
+            <p>Add new product</p>
             <div className="form">
               <strong>Name:</strong>
               <input
                 type="text"
                 placeholder="Product Name"
+                autofocus
                 ref={nameInput => (this.nameInput = nameInput)}
               />
             </div>

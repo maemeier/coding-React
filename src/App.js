@@ -22,9 +22,10 @@ class App extends Component {
     };
     this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
     this.handleAddProduct = this.handleAddProduct.bind(this);
+    this.handleEditSubmit = this.handleEditSubmit.bind(this);
   }
   componentWillMount() {
-    const product = this.getProducts;
+    const product = this.getProducts();
     this.setState({ products });
   }
 
@@ -45,7 +46,19 @@ class App extends Component {
     this.setState({ products });
   }
 
-  handleUpdateProduct() {}
+  handleEditSubmit(name, color, price, originalName) {
+    let products = this.getProducts();
+    products = products.map(product => {
+      if (product.name === originalName) {
+        product.name = name;
+        product.color = color;
+        product.price = price;
+      }
+      return product;
+    });
+
+    this.setState({ products });
+  }
 
   handleDeleteProduct(name) {
     const products = this.getProducts();
@@ -81,6 +94,7 @@ class App extends Component {
                   price={product.price}
                   color={product.color}
                   handleDeleteProduct={this.handleDeleteProduct}
+                  handleEditSubmit={this.handleEditSubmit}
                 />
               );
             })}
