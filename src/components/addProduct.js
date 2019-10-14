@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import "../style.css";
 
 class addProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  onSubmit(event) {
+  onSubmit = event => {
     event.preventDefault();
     this.props.handleAddProduct(
       this.nameInput.value,
@@ -17,7 +12,7 @@ class addProduct extends Component {
     this.nameInput.value = " ";
     this.colorInput.value = " ";
     this.priceInput.value = " ";
-  }
+  };
   render() {
     return (
       <div>
@@ -27,25 +22,31 @@ class addProduct extends Component {
             <div className="form">
               <strong>Name:</strong>
               <input
+                className="addProduct"
                 type="text"
                 placeholder="Product Name"
                 autofocus
+                required
                 ref={nameInput => (this.nameInput = nameInput)}
               />
             </div>
             <div className="form">
               <strong>Color:</strong>
               <input
+                className="addProduct"
                 type="text"
                 placeholder="Color"
+                required
                 ref={colorInput => (this.colorInput = colorInput)}
               />
             </div>
             <div className="form">
               <strong>Price:</strong>
               <input
+                className="addProduct"
                 type="number"
                 placeholder=" Price"
+                required
                 ref={priceInput => (this.priceInput = priceInput)}
               />
             </div>

@@ -2,75 +2,93 @@ import React, { Component } from "react";
 import "../style.css";
 
 class ProductItem extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    isUpdated: false,
+    name: this.props.name,
+    color: this.props.color,
+    price: this.props.price
+  };
 
-    this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
-    this.handleUpdateProduct = this.handleUpdateProduct.bind(this);
-    this.handleEditSubmit = this.handleEditSubmit.bind(this);
-    this.state = {
-      isUpdated: false
-    };
-  }
-
-  handleDeleteProduct() {
+  handleDeleteProduct = () => {
     const { handleDeleteProduct, name } = this.props;
     handleDeleteProduct(name);
-  }
+  };
 
-  handleUpdateProduct() {
+  handleUpdateProduct = () => {
     this.setState({ isUpdated: true });
-  }
+  };
 
-  handleEditSubmit(event) {
-    event.preventDefault();
+  handleEditSubmit = (handleEditSubmit, name, color, price, originalName) => {
+    this.setState({ isUpdated: true });
+  };
+
+  handleInputChange = (name, value) => {
+    this.setState({ [name]: value });
+  };
+
+  handleEditSave = () => {
     this.props.handleEditSubmit(
-      this.refs.name.value,
-      this.refs.color.value,
-      this.refs.price.value,
-      this.props.name,
-      this.props.color,
-      this.props.price
+      this.state.name,
+      this.state.color,
+      this.state.price,
+      this.props.name
     );
     this.setState({ isUpdated: false });
-  }
+  };
 
   render() {
     const { name, price, color } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {this.state.isUpdated ? (
-          <form onSubmit={this.handleEditSubmit}>
-            <input
-              type="text"
-              placeholder="change name"
-              defaultValue={name}
-              ref="name"
-            />
-
-            <input
-              type="text"
-              placeholder="change color"
-              defaultValue={color}
-              ref="color"
-            />
-
-            <input
-              type="number"
-              placeholder="change price"
-              defaultValue={price}
-              ref="price"
-            />
-            <button className="updateButton">Save</button>
-          </form>
+          <React.Fragment>
+            <td>
+              <input
+                className="editData"
+                type="text"
+                placeholder="change name"
+                defaultValue={name}
+                value={this.state.name}
+                required
+                onChange={e => this.handleInputChange("name", e.target.value)}
+              />
+            </td>
+            <td>
+              <input
+                className="editData"
+                type="text"
+                placeholder="change color"
+                defaultValue={color}
+                required
+                value={this.state.color}
+                onChange={e => this.handleInputChange("color", e.target.value)}
+              />
+            </td>
+            <td>
+              <input
+                className="editData"
+                type="number"
+                placeholder="change price"
+                defaultValue={price}
+                value={this.state.price}
+                required
+                onChange={e => this.handleInputChange("price", e.target.value)}
+              />
+            </td>
+            <td>
+              <button className="updateButton" onClick={this.handleEditSave}>
+                Save
+              </button>
+            </td>
+          </React.Fragment>
         ) : (
-          <div>
+          <React.Fragment>
             {" "}
-            <td>{name}</td>
+            <td> {name}</td>
             <td className="descriptionName">{color}</td>
             <td className="descriptionName">CHF {price}</td>
             <td>
-              <button className="editButton" onClick={this.handleUpdateProduct}>
+              <button className="editButton" onClick={this.handleEditSubmit}>
                 edit
               </button>
             </td>
@@ -83,9 +101,9 @@ class ProductItem extends Component {
                 delete
               </button>
             </td>
-          </div>
+          </React.Fragment>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }

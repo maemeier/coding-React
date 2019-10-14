@@ -1,13 +1,26 @@
 body {
-  background-color: #f3f5fb;
+  background-color: #e1e3ed;
 }
-
+.wrapper {
+  height: 1000px;
+  border-radius: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.svg {
+  z-index: -1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0.8;
+}
 h2 {
   position: relative;
   text-align: center;
-  margin-top: 250px;
+  margin-top: 100px;
   text-transform: uppercase;
   color: #102f63;
+  padding-top: 60px;
 }
 
 .container {
@@ -32,11 +45,15 @@ input {
   border-radius: 7px;
   outline: none;
   background-color: #f3f5fa;
-  width: 200px;
+  width: 120px;
   height: 20px;
   margin-left: 10px;
+  padding-left: 10px;
 }
 
+.addProduct {
+  width: 200px;
+}
 .displayBox {
   background-color: #eff1f4;
   width: auto;
@@ -96,7 +113,7 @@ tr:nth-child(even) {
 }
 
 .editButton {
-  background: #3f464c;
+  background: #5b616f;
 
   border-radius: 3px;
   color: white;
@@ -104,6 +121,13 @@ tr:nth-child(even) {
   margin: auto;
   font-size: 13px;
   border: none;
+}
+
+.editData {
+  background-color: #40444d;
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
 }
 
 .deleteButton {

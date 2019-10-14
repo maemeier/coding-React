@@ -5,55 +5,95 @@ import "./style.css";
 
 // create data
 const products = [
-  { id: 1, name: "Apple", color: "Stonegrey", price: 789 },
-  { id: 2, name: "Samsung Galaxy S8", color: "Midnight Black", price: 569 },
-  { id: 3, name: "Hauwai P9", color: "Mystic Silver", price: 272 }
+  { id: 1, name: "Apple iphone 6s", color: "light Gray", price: 789 },
+  { id: 2, name: "Samsung Galaxy S8", color: "midnight black", price: 569 },
+  { id: 3, name: "Hauwai P9", color: "indego blue", price: 272 }
 ];
 
-// get data
+// check color function
 
-localStorage.setItem("products", JSON.stringify(products));
+function getPrimaryColor(color) {
+  const colors = [
+    "black",
+    "gray",
+    "red",
+    "blue",
+    "pink",
+    "rosegold",
+    "yellow",
+    "green",
+    "gold",
+    "silver",
+    "orange",
+    "brown",
+    "purple",
+    "white"
+  ];
+  let originalColor;
+  colors.forEach(c => {
+    if (color && color.toLowerCase().includes(c)) {
+      originalColor = c;
+    }
+  });
+  return originalColor;
+}
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: JSON.parse(localStorage.getItem("products"))
-    };
-    this.handleDeleteProduct = this.handleDeleteProduct.bind(this);
-    this.handleAddProduct = this.handleAddProduct.bind(this);
-    this.handleEditSubmit = this.handleEditSubmit.bind(this);
-  }
-  componentWillMount() {
-    const product = this.getProducts();
-    this.setState({ products });
-  }
+  state = {
+    products: []
+  };
 
-  getProducts() {
-    return this.state.products;
-  }
+  // store data in localStorage
+  componentDidMount() {
+    const productsFromStorage = localStorage.getItem("products");
 
-  handleAddProduct(name, color, price) {
-    const products = this.getProducts();
-    if (products.includes(name) !== products.name) {
-      products.push({
-        name,
-        color,
-        price
+    if (productsFromStorage) {
+      this.setState({
+        products: JSON.parse(productsFromStorage)
       });
     } else {
-      alert("the product is already exsisted");
+      this.setState({
+        products
+      });
     }
-
-    // if the product already exsist, show warining
-    // convert all color name to stardard color
-
-    this.setState({ products });
+  }
+  componentWillMount() {
+    const products = this.state.products;
+    ///this.setState({ products });
   }
 
-  handleEditSubmit(name, color, price, originalName) {
-    let products = this.getProducts();
-    products = products.map(product => {
+  componentDidUpdate() {
+    localStorage.setItem("products", JSON.stringify(this.state.products));
+  }
+
+  handleAddProduct = (name, color, price) => {
+    const { products } = this.state;
+
+    // check if name is nameIsAvailable
+    let nameIsAvailable = false;
+    products.forEach(x => {
+      if (x.color === color) nameIsAvailable = true;
+    });
+
+    if (!nameIsAvailable) {
+      this.setState({
+        products: [
+          ...this.state.products,
+          {
+            name,
+            color,
+            price
+          }
+        ]
+      });
+    } else {
+      alert("This product is already exsisted 😊");
+    }
+  };
+
+  handleEditSubmit = (name, color, price, originalName) => {
+    const { products } = this.state;
+    const updatedProducts = products.map(product => {
       if (product.name === originalName) {
         product.name = name;
         product.color = color;
@@ -61,50 +101,51 @@ class App extends Component {
       }
       return product;
     });
+    console.log(updatedProducts);
 
-    this.setState({ products });
-  }
+    this.setState({ products: updatedProducts });
+  };
 
-  handleDeleteProduct(name) {
-    const products = this.getProducts();
-    const deleteProduct = products.filter(product => {
+  handleDeleteProduct = name => {
+    const deleteProduct = this.state.products.filter(product => {
       return product.name !== name;
     });
     this.setState({ products: deleteProduct });
-    console.log(deleteProduct);
-  }
+  };
 
   render() {
     return (
       <div>
-        <h2> Smart phones stock</h2>
-        <div className="container">
-          <Addproduct handleAddProduct={this.handleAddProduct} />
-          <div className="displayBox">
-            <table>
-              <thead>
-                <th className="headerName">Product</th>
-                <th className="headerName">Color</th>
-                <th className="headerName">Price</th>
-                <th className="headerName">Edit</th>
-                <th className="headerName">Delete</th>
-              </thead>
-            </table>
+        <div className="wrapper">
+          <h2> Smart phones stock</h2>
+          <div className="container">
+            <Addproduct handleAddProduct={this.handleAddProduct} />
+            <div className="displayBox">
+              <table>
+                <thead>
+                  <th className="headerName">Product</th>
+                  <th className="headerName">Color</th>
+                  <th className="headerName">Price</th>
+                  <th className="headerName">Edit</th>
+                  <th className="headerName">Delete</th>
+                </thead>
 
-            {this.state.products.map(product => {
-              return (
-                <tr>
-                  <ProductItem
-                    key={product.name}
-                    name={product.name}
-                    price={product.price}
-                    color={product.color}
-                    handleDeleteProduct={this.handleDeleteProduct}
-                    handleEditSubmit={this.handleEditSubmit}
-                  />
-                </tr>
-              );
-            })}
+                {this.state.products.map(product => {
+                  return (
+                    <tr>
+                      <ProductItem
+                        key={product.name}
+                        name={product.name}
+                        price={product.price}
+                        color={getPrimaryColor(product.color)}
+                        handleDeleteProduct={this.handleDeleteProduct}
+                        handleEditSubmit={this.handleEditSubmit}
+                      />
+                    </tr>
+                  );
+                })}
+              </table>
+            </div>
           </div>
         </div>
       </div>
