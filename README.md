@@ -1,3 +1,16 @@
+React App CRUD
+
+<img width="1247" alt="ภาพหน้าจอ 2019-10-15 เวลา 01 47 47" src="https://user-images.githubusercontent.com/29822960/66789895-ddf52080-eeed-11e9-96c9-d792bd6f2c57.png">
+
+EDIT, DELETE, and ADD data 
+
+Users are unable to add exsisted product (expect that product has difference color)
+<img width="1224" alt="ภาพหน้าจอ 2019-10-15 เวลา 01 49 24" src="https://user-images.githubusercontent.com/29822960/66789937-08df7480-eeee-11e9-9d95-5c53e5650db8.png">
+
+Convert color's adjective name to standard name
+<img width="1245" alt="ภาพหน้าจอ 2019-10-15 เวลา 01 51 32" src="https://user-images.githubusercontent.com/29822960/66790072-94f19c00-eeee-11e9-9eff-1dea6ca18240.png">
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
