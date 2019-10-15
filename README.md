@@ -10,6 +10,9 @@ Users are unable to add exsisted product (expect that product has difference col
 Convert color's adjective name to standard name
 <img width="1245" alt="ภาพหน้าจอ 2019-10-15 เวลา 01 51 32" src="https://user-images.githubusercontent.com/29822960/66790072-94f19c00-eeee-11e9-9eff-1dea6ca18240.png">
 
+Edit the product
+<img width="1188" alt="ภาพหน้าจอ 2019-10-15 เวลา 03 01 52" src="https://user-images.githubusercontent.com/29822960/66792278-48ab5980-eef8-11e9-99c2-ba81518aea01.png">
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
